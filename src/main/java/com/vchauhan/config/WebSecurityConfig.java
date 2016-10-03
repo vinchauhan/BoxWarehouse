@@ -55,13 +55,16 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .exceptionHandling().and()
-                .anonymous().and()
+                // don't create session
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
 //                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                .and()
-                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+
+//                .authorizeRequests().antMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new TokenAuthFilter(tokenAuthService), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new LoginFilter("/auth/login", authenticationManager(), tokenAuthService), UsernamePasswordAuthenticationFilter.class);
