@@ -30,7 +30,7 @@ public class BoxController {
     @Autowired
     private BoxService boxService;
 
-    @CrossOrigin(origins = "http://localhost:8100", allowedHeaders="*",allowCredentials="true")
+//    @CrossOrigin(origins = "http://localhost:8100", allowedHeaders="*",allowCredentials="true")
     @RequestMapping(value = "/api/v1/box", method = RequestMethod.POST,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public void addBox(@RequestBody Box box) {
