@@ -63,8 +63,9 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests().antMatchers("/h2-console/**").permitAll()
                 .and()
-                .addFilterBefore(new LoginFilter("/auth/login", authenticationManager(), tokenAuthService), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new TokenAuthFilter(tokenAuthService), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new TokenAuthFilter(tokenAuthService), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new LoginFilter("/auth/login", authenticationManager(), tokenAuthService), UsernamePasswordAuthenticationFilter.class);
+
 
     }
 
